@@ -4,6 +4,8 @@ describe("Thermostat", function() {
   var thermostat;
   var powerSavingMode;
   var minimumTemperature;
+  var maximumTemperature;
+  var poweSavingModeTemperature;
 
 
   beforeEach( function() {
@@ -33,12 +35,23 @@ describe("Thermostat", function() {
   it("should have power saving mode on", function() {
     thermostat.powerSavingOn();
     expect(thermostat.powerSavingMode).toBe(true);
-  })
+  });
 
   it("should have power saving mode off", function() {
     thermostat.powerSavingOff();
     expect(thermostat.powerSavingMode).toBe(false);
-  })
+  });
+
+  it("should set maximum temp of 25 degrees if PSM is on", function () {
+    thermostat.temperature = 25;
+    expect(function(){ thermostat.increase(); }).toThrow("Cannot increase temperature powersave mode on");
+  });
+
+  it("should set maximum temp of 32 degrees if PSM is off", function () {
+    thermostat.powerSavingOff();
+    thermostat.temperature = 32;
+    expect(function(){ thermostat.increase(); }).toThrow("Cannot increase temperature beyond maximum");
+  });
 
 
 });

@@ -3,10 +3,18 @@ function Thermostat() {
   this.temperature = 20;
   this.powerSavingMode = true;
   this.minimumTemperature = 10;
+  this.maximumTemperature = 32;
+  this.poweSavingModeTemperature = 25;
 };
 
   Thermostat.prototype.increase = function () {
+    if (this.powerSavingMode === true && this.temperature === this.poweSavingModeTemperature) {
+      throw "Cannot increase temperature powersave mode on";
+    } else if (this.powerSavingMode === false && this.temperature === this.maximumTemperature){
+      throw "Cannot increase temperature beyond maximum";
+    } else{
     this.temperature += 1;
+    }
   };
 
   Thermostat.prototype.decrease = function () {
