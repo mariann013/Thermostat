@@ -24,7 +24,7 @@ describe("Thermostat", function() {
     expect(thermostat.temperature).toBe(19);
   });
 
-  it("has a minimum temperate", function() {
+  it("has a minimum temperature", function() {
     thermostat.temperature = minimumTemperature;
     expect(function(){ thermostat.decrease(); }).toThrow("Cannot decrease temperature beyond minimum");
   });
