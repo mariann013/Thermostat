@@ -53,5 +53,25 @@ describe("Thermostat", function() {
     expect(function(){ thermostat.increase(); }).toThrow("Cannot increase temperature beyond maximum");
   });
 
+  it("should set temperature to 20 degrees when reset", function() {
+    thermostat.temperature = 25;
+    thermostat.resetTemperature();
+    expect(thermostat.temperature).toEqual(20);
+  });
+
+  it("should be green if under 18 degrees", function() {
+    thermostat.temperature = 15;
+    expect(thermostat.colour()).toEqual("green");
+  });
+
+  it("should be yellow if between 18 and 25 degrees", function() {
+    thermostat.temperature = 20;
+    expect(thermostat.colour()).toEqual("yellow");
+  });
+
+  it("should be red if over 25 degrees", function() {
+    thermostat.temperature = 30;
+    expect(thermostat.colour()).toEqual("red");
+  });
 
 });
